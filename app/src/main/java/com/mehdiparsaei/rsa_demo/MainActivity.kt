@@ -23,17 +23,11 @@ class MainActivity : AppCompatActivity() {
             TAG,
             "encryptedData: ${Base64.encodeToString(encryptedData, Base64.DEFAULT)}"
         )
-        try {
-            val decryptedData = RSACryptoHandler.decryptData(encryptedData, keyId)
-            Log.d(
-                TAG,
-                "decryptedData: ${Base64.encodeToString(decryptedData, Base64.DEFAULT)}"
-            )
-        } catch (ex: Exception) {
-            Log.e(
-                TAG,
-                "Exception: $ex"
-            )
-        }
+        val decryptedData = RSACryptoHandler.decryptData(encryptedData, keyId)
+        Log.d(
+            TAG,
+            "decryptedData: ${String(decryptedData)}"
+        )
+
     }
 }

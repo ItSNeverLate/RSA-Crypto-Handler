@@ -7,11 +7,7 @@ import java.security.Key
 import java.security.KeyPairGenerator
 import java.security.KeyStore
 import java.security.PublicKey
-import java.security.spec.MGF1ParameterSpec
 import javax.crypto.Cipher
-import javax.crypto.spec.OAEPParameterSpec
-import javax.crypto.spec.PSource
-import kotlin.jvm.Throws
 
 object RSACryptoHandler {
     private const val ANDROID_KEYSTORE = "AndroidKeyStore"
@@ -19,7 +15,7 @@ object RSACryptoHandler {
 
     private const val TRANSFORMATION = "RSA/ECB/PKCS1Padding"
     private val keyPairGenerator: KeyPairGenerator =
-        KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA,ANDROID_KEYSTORE)
+        KeyPairGenerator.getInstance(KeyProperties.KEY_ALGORITHM_RSA, ANDROID_KEYSTORE)
     private val keyStore: KeyStore = KeyStore.getInstance(ANDROID_KEYSTORE).apply {
         load(null)
     }
@@ -36,7 +32,6 @@ object RSACryptoHandler {
     private fun generateKeyPair(alias: String) {
         with(keyPairGenerator) {
             initialize(getParameterSpec(alias))
-//            initialize(RSA_KEY_SIZE)
             genKeyPair()
         }
     }
@@ -72,7 +67,6 @@ object RSACryptoHandler {
         return cipher.doFinal(data)
     }
 
-    @Throws(Exception::class)
     fun decryptData(data: ByteArray, keyId: String): ByteArray {
         val cipher: Cipher = Cipher.getInstance(TRANSFORMATION).apply {
             init(Cipher.DECRYPT_MODE, getPrivatKey(keyId))

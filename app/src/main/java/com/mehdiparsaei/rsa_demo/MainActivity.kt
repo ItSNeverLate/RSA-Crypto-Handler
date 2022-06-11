@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val keyId = "3"
+        val keyId = "51"
 
         Log.d(TAG, "public key PEM: ${RSACryptoHandler.getPublicKeyPEM(keyId)}")
 
